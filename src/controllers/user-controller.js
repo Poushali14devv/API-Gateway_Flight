@@ -1,3 +1,4 @@
+
 // const { StatusCodes } = require('http-status-codes');
 
 // const { UserService } = require('../services');
@@ -27,9 +28,33 @@
 //     }
 // }
 
-// module.exports = {
-//     signup
+// async function signin(req, res) {
+//     try {
+//         const user = await UserService.signin({
+//             email: req.body.email,
+//             password: req.body.password
+//         });
+//         SuccessResponse.data = user;
+//         return res
+//                 .status(StatusCodes.CREATED)
+//                 .json(SuccessResponse);
+//     } catch(error) {
+//         console.log(error);
+//         ErrorResponse.error = error;
+//         return res
+//                 .status(error.statusCode)
+//                 .json(ErrorResponse);
+//     }
 // }
+
+// module.exports = {
+//     signup,
+//     signin
+// }
+
+
+
+
 const { StatusCodes } = require('http-status-codes');
 
 const { UserService } = require('../services');
@@ -78,7 +103,28 @@ async function signin(req, res) {
     }
 }
 
+async function addRoleToUser(req, res) {
+    try {
+        const user = await UserService.addRoletoUser({
+            role: req.body.role,
+            id: req.body.id
+        });
+        SuccessResponse.data = user;
+        return res
+                .status(StatusCodes.CREATED)
+                .json(SuccessResponse);
+    } catch(error) {
+        console.log(error);
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
+
 module.exports = {
     signup,
-    signin
+    signin,
+    addRoleToUser
 }
